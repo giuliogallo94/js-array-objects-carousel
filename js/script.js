@@ -26,6 +26,12 @@ const images = [
   },
 ];
 
+
+ let play = true;
+let reverse = false;
+let reversePlay = "";
+
+
 //Stampa delle immagini sul DOM
 const itemsElem = document.querySelector(".items");
 let imagesString = "";
@@ -62,26 +68,81 @@ console.log(thumbnailsString);
 
 miniElem.innerHTML += thumbnailsString;
 
-// EVENT
+// EVENTS
 let currentIndex = 0;
 const slideElems = document.querySelectorAll(".item");
 slideElems[currentIndex].classList.add("active");
 
-// FUNZIONALITÀ AUTOPLAY
+// Autoplay
 
-const autoPlay = setInterval(function () {
+let autoPlay = setInterval(function () {
   if (currentIndex < 4) {
     slideElems[currentIndex].classList.remove("active");
     currentIndex++;
     slideElems[currentIndex].classList.add("active");
-  } else if ((currentIndex = 4)) {
+  } else if (currentIndex == 4) {
     slideElems[currentIndex].classList.remove("active");
     currentIndex = 0;
 
     slideElems[currentIndex].classList.add("active");
   }
-}, 3000);
+}, 2000);
 
+
+// Click start-stop button 
+
+let startStopBtn = document.querySelector(".start-stop");
+startStopBtn.addEventListener("click", function() {
+  
+  if(play == true || reverse == true) {
+  clearInterval(autoPlay);
+  clearInterval(reversePlay);
+    play = false;
+    console.log(play);
+  }
+    else if (play == false || reverse == true) {
+      clearInterval(reversePlay); 
+    let autoPlay = setInterval(function () {
+      if (currentIndex < 4) {
+        slideElems[currentIndex].classList.remove("active");
+        currentIndex++;
+        slideElems[currentIndex].classList.add("active");
+      } else if (currentIndex == 4) {
+        slideElems[currentIndex].classList.remove("active");
+        currentIndex = 0;
+      
+        slideElems[currentIndex].classList.add("active");
+      }
+    }, 2000);
+   }
+})
+
+
+
+
+// Click reverse button 
+let reverseBtn = document.querySelector(".reverse");
+reverseBtn.addEventListener("click", function() {
+  let reversePlay = setInterval(function () {
+    clearInterval(autoPlay);
+    play = false;
+    if (currentIndex > 0) {
+      slideElems[currentIndex].classList.remove("active");
+      currentIndex--;
+      slideElems[currentIndex].classList.add("active");
+    } else if (currentIndex === 0) {
+      
+      slideElems[currentIndex].classList.remove("active");
+      currentIndex = 4;
+      slideElems[currentIndex].classList.add("active");
+    }
+    reverse = true;
+  }
+, 2000)
+})
+
+
+// Evento al click delle frecce
 document.querySelector(".next").addEventListener("click", function () {
   slideElems[currentIndex].classList.remove("active");
   if (currentIndex < slideElems.length - 1) {
@@ -101,3 +162,20 @@ document.querySelector(".prev").addEventListener("click", function () {
   }
   slideElems[currentIndex].classList.add("active");
 });
+
+// Evento al click delle thumbnails
+
+let thumbnailsElem = document.querySelectorAll(".thumbnails-item");
+
+for (let i = 0; i < thumbnailsElem.length; i++) {
+  curThumb = thumbnailsElem[i];
+  console.log(curThumb);
+  curThumb.addEventListener("click", () => {
+    slideElems[currentIndex].classList.remove("active");
+    currentIndex = i;
+    console.log(curThumb);
+    slideElems[currentIndex].classList.add("active");
+  })
+}
+
+
