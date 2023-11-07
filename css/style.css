@@ -25,6 +25,19 @@
   position: relative;
 }
 
+.description {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: right;
+  background-color: #00000080;
+}
+
+.description p {
+  font-size: 15px;
+}
+
 .item img {
   width: 100%;
   height: 100%;
@@ -105,4 +118,14 @@
   bottom: 35%;
   left: 50%;
   transform: translate(-50%) rotate(135deg);
+}
+
+.miniatures {
+  height: 300px;
+  position: relative;
+}
+.miniature-item img {
+  height: calc(300px / 5);
+  width: 100%;
+  object-fit: cover;
 }
