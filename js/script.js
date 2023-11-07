@@ -47,25 +47,40 @@ console.log(imagesString);
 
 itemsElem.innerHTML = itemsElem.innerHTML + imagesString;
 
-// Stampa delle miniature sul DOM
-const miniElem = document.querySelector(".miniatures");
+// Stampa delle thumbnails sul DOM
+const miniElem = document.querySelector(".thumbnails");
 console.log(miniElem);
-let miniatureString = "";
+let thumbnailsString = "";
 images.forEach((curImages) => {
-  let miniature = curImages.image;
-  miniatureString += `
-    <div class="miniature-item">
-        <img src="${miniature}" alt="">
+  let thumbnails = curImages.image;
+  thumbnailsString += `
+    <div class="thumbnails-item">
+        <img src="${thumbnails}" alt="">
     </div>`;
 });
-console.log(miniatureString);
+console.log(thumbnailsString);
 
-miniElem.innerHTML += miniatureString;
+miniElem.innerHTML += thumbnailsString;
 
 // EVENT
 let currentIndex = 0;
 const slideElems = document.querySelectorAll(".item");
 slideElems[currentIndex].classList.add("active");
+
+// FUNZIONALITÀ AUTOPLAY
+
+const autoPlay = setInterval(function () {
+  if (currentIndex < 4) {
+    slideElems[currentIndex].classList.remove("active");
+    currentIndex++;
+    slideElems[currentIndex].classList.add("active");
+  } else if ((currentIndex = 4)) {
+    slideElems[currentIndex].classList.remove("active");
+    currentIndex = 0;
+
+    slideElems[currentIndex].classList.add("active");
+  }
+}, 3000);
 
 document.querySelector(".next").addEventListener("click", function () {
   slideElems[currentIndex].classList.remove("active");

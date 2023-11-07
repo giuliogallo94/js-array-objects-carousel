@@ -120,12 +120,12 @@
   transform: translate(-50%) rotate(135deg);
 }
 
-.miniatures {
+.thumbnails {
   height: 300px;
   position: relative;
 }
-.miniature-item img {
+.thumbnails-item img {
   height: calc(300px / 5);
-  width: 100%;
+  width: 200px;
   object-fit: cover;
 }
