@@ -126,6 +126,6 @@
 }
 .thumbnails-item img {
   height: calc(300px / 5);
-  width: 200px;
+  width: 100%;
   object-fit: cover;
 }
